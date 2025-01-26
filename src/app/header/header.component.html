@@ -20,39 +20,36 @@
     <!-- Logo -->
     <!-- Dieser Abschnitt enthält das Logo der Website und den Titel "Herzenkleider". -->
     <div class="logo">
-        <img src="assets/images/logo.png" alt="Logo" width="90" height="70"/> <!-- Logo-Bild -->
-        <h3>Herzenkleider</h3><!-- Website-Titel -->
+        <img src="assets/images/logo.png" alt="Logo" width="80" height="50" />
+        <h3>Herzenskleider</h3>
     </div>
 
     <!-- Desktop-Navigation -->
     <!-- Navigation für Desktop-Bildschirme mit Dropdown-Menüs. -->
     <nav class="main-nav">
         <ul class="nav-list">
-            <!-- Dropdown-Menü für "Startseite" -->
             <li class="dropdown">
                 <a href="#">Startseite</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Natur & Umwelt</a></li> <!-- Unterpunkt: Natur & Umwelt -->
-                    <li><a href="#">Tiere</a></li> <!-- Unterpunkt: Tiere -->
+                    <li><a href="#">Natur & Umwelt</a></li>
+                    <li><a href="#">Tiere</a></li> 
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="#">Projekte</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Armut Schweiz</a></li><!-- Unterpunkt: Armut Schweiz -->
-                    <li><a href="#">Kinderhilfswerke</a></li><!-- Unterpunkt: Kinderhilfswerke -->
+                    <li><a href="#">Armut Schweiz</a></li>
+                    <li><a href="#">Kinderhilfswerke</a></li>
                 </ul>
             </li>
-            <!-- Link zur Organisationsseite -->
             <li><a routerLink="/organisation">Organisation</a></li>
         </ul>
     </nav>
     <!-- Spenden-Button -->
     <!-- Ein Button, der die Nutzer zur Spenden-Seite weiterleitet. -->
-    <button type="button" class="btn btn-sm btn-pill btn-danger" routerLink="/register"><i class="fa fa-heart"></i>
-        Spenden
+    <button type="button" class="btn btn-sm btn-pill btn-danger" routerLink="/register">
+        <i class="fa fa-heart"></i> Spenden
     </button>
-
 
     <!-- Mobile-Menü-Toggle -->
     <!-- Button zum Öffnen des mobilen Menüs. -->
@@ -60,29 +57,22 @@
         <button class="mobile-menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">☰
         </button>
     </div>
-    <!-- Handy-Navigation -->
+
     <!-- Offcanvas-Menü für mobile Geräte. -->
     <div class="container-fluid mt-3">
-        <!-- Offcanvas-Menü -->
         <div class="offcanvas offcanvas-end" id="demo">
             <div class="offcanvas-header">
-                <!-- Header des Offcanvas-Menüs -->
-                <h1 class="offcanvas-title">Menü</h1><!-- Titel des Menüs -->
-                <!-- Spenden-Button für die mobile Navigation -->
-                <button type="button" class="button button3" routerLink="/register">
+                <h1 class="offcanvas-title">Menü</h1>
+                <button type="button" class="button button3"  routerLink="/register">
                     <i class="bi bi-heart"></i> Spenden
                 </button>
-                <!-- Suchfeld in der mobilen Navigation -->
                 <p aria-label="Search">
                     <i class="fa fa-search"></i><a href="#"></a>
                 </p>
-                <!-- Schließen-Button des Offcanvas-Menüs -->
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
-             <!-- Hauptinhalt des Offcanvas-Menüs -->
             <div class="offcanvas-body">
                 <div class="list-group">
-                    <!-- Links zu verschiedenen Seiten -->
                     <a href="#" class="list-group-item list-group-item-action">Startseite</a>
                     <a href="#" class="list-group-item list-group-item-action">Projekte</a>
                     <a href="#" class="list-group-item list-group-item-action">Organisationen</a>

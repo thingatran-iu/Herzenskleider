@@ -1,0 +1,25 @@
+
+  /* Stil für das Footer-Element */
+  footer {
+    text-align: center;
+    padding: 5rem;
+    background-color: #e5b4b4;
+  }
+
+  /* Stil für das Main-Element */
+  main {
+    width: 80%; 
+    max-width: 90rem;
+    margin: 2.5rem auto;
+    display: grid;
+    grid-auto-flow: row;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+/* Media Query für Bildschirme ab 768px Breite */
+  @media (min-width: 768px) {
+    main {
+      margin: 4rem auto;/* Erhöht den vertikalen Abstand auf größeren Bildschirmen */
+    }
+  }
