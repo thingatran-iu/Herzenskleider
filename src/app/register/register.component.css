@@ -1,85 +1,227 @@
 .backdrop {
-    background-color: rgba(0, 0, 0, 0.9);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-  }
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+}
+
+dialog {
+  width: 90%;
+  max-width: 30rem;
+  background-color: #433352;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  padding: 1.5rem;
+  top: 5rem;
+  z-index: 20;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #e7aaf0;
+  margin-bottom: 0.5rem;
+}
+
+
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+button[type="button"] {
+  color: #dbd3e5;
+  font-weight: bold;
+
+
+}
+
+button[type="button"]:hover,
+button[type="button"]:active {
+  color: #e0d5db;
+  background-color: #ac146c;
+  box-shadow: 0 1px 3px rgba(154, 63, 63, 0.3);
+}
+
+button[type="submit"] {
+  background-color: #9615aa;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:active {
+  background-color: #ac146c;
+  box-shadow: 0 1px 6px rgba(154, 63, 63, 0.3);
+}
+
+/* ANMELDUNG Überschrift */
+h6 {
+  font-size: 1.25rem;
+  color: #d25ae5;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  border-bottom: 3px solid #d25ae5;
+  padding-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  color: #e7aaf0;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid #8c3398;
+  padding-bottom: 0.5rem;
+
+}
+
+.pickup-class {
+  color: red;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.office-class {
+  color: rgb(22, 180, 53);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-group-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  /* Abstand zwischen den Eingabegruppen */
+  align-items: center;
+}
+
+.form-group {
+  flex: 1;
+  /* Beide Gruppen nehmen gleich viel Platz ein */
+  display: flex;
+  flex-direction: column;
+  /* Label über dem Dropdown */
+}
+
+label {
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  /* Abstand zwischen Label und Eingabefeld */
+  color: #ab9ac0;
+}
+
+.form-select {
+  padding: 0.5rem;
+  border: 1px solid #ab9ac0;
+  border-radius: 4px;
+  font: inherit;
+  background-color: #f5f3f7;
+}
+
+p {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+/* Abholadresse Container */
+.abholadresse-container {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 2px solid #433352;
+  /* Passend zum Dialog-Styling */
+  border-radius: 6px;
+  background-color: #f5f3f7;
+}
+
+.Art {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid #433352;
+  border-radius: 6px;
+  background-color: #f5f3f7;
+  text-align: left;
+}
+
+/* Label Styling */
+.Art label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #433352;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Starker Text */
+.Art strong {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 768px) and (min-width:300px) {
   dialog {
-    width: 90%;
-    max-width: 30rem;
-    background-color: #433352;
-    border-radius: 6px;
-    border: none;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-    padding: 1rem;
-    top: 5rem;
+    padding: 2rem;
+    top: 8rem;
   }
-  label {
-    display: block;
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: #ab9ac0;
+
+  .row {
+    gap: 1.5rem;
   }
-  input,
-  textarea {
-    width: 100%;
-    font: inherit;
-    padding: 0.15rem 0.25rem;
-    border-radius: 4px;
-    border: 1px solid #ab9ac0;
-    background-color: #f5f3f7;
-  }
-  .actions {
-    margin: 1rem 0 0;
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.25rem;
-  }
+
   button {
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    padding: 0.35rem 1.25rem;
-    border-radius: 4px;
-    background-color: transparent;
+    padding: 0.6rem 1.8rem;
   }
-  button[type="button"] {
-    color: #bdadcf;
+
+  .form-group-row {
+    flex-direction: column;
+    /* Umbruch für kleine Bildschirme */
   }
-  button[type="button"]:hover,
-  button[type="button"]:active {
-    color: #d0c2e1;
-    background-color:  #ac146c;
-    box-shadow: 0 1px 3px rgba(154, 63, 63, 0.3);
+
+  .form-group {
+    width: 100%;
+    /* Volle Breite auf kleinen Bildschirmen */
   }
-  button[type="submit"] {
-    background-color: #9615aa;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-  button[type="submit"]:hover,
-  button[type="submit"]:active {
-    background-color: #ac146c;
-    box-shadow: 0 1px 6px rgba(154, 63, 63, 0.3);
-  }
-  h6 {
-    margin: 0;
-    color:  #d25ae5;
-  }
-  .pickup-class {
-    color:red;
-    font-weight: bold;
-  }
-  
+
+  .pickup-class,
   .office-class {
-    color: rgb(22, 180, 53);
-    font-weight:normal;
+    font-size: 0.9rem;
   }
-  @media (min-width: 768px) {
-    dialog {
-      padding: 2rem;
-    }
+}
+
+@media (min-width: 768px) {
+  dialog {
+    padding: 2rem;
+    top: 8rem;
   }
+
+  .Art {
+    padding: 0.8rem;
+  }
+
+  .Art label {
+    font-size: 0.9rem;
+  }
+}

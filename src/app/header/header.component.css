@@ -1,19 +1,27 @@
 .header {
   display: flex;
-  padding: 20px;
+  padding: 10px;
   background-color: #8e0e0e;
   align-items: center;
+  justify-content: space-between;
+
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.5em;
+  font-size: 2.5em;
   font-weight: bold;
-  color: rgb(150, 215, 224);
-  margin-left: 50px;
-  text-shadow: 1px 1px 2px rgb(11, 22, 218), 0 0 25px rgb(26, 10, 173), 0 0 5px rgb(2, 25, 44);
+  color: aqua;
+  margin-left: 20px;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  text-transform:capitalize; 
+  cursor: pointer;
+
+  
+
+ 
 }
 
 .top-nav {
@@ -28,7 +36,8 @@
 
 .main-nav {
   display: flex;
-  margin-left: 15%;
+  margin-left: 10%;
+  align-items: center;
 }
 
 .nav-list {
@@ -147,7 +156,6 @@
   color: white;
   cursor: pointer;
 
-
 }
 
 button.btn {
@@ -155,7 +163,7 @@ button.btn {
   gap: 5px;
   text-align: center;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 30px;
 
 }
 
@@ -174,18 +182,17 @@ button.btn {
   gap: 20px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) and (min-width: 300px) {
 
   .mobile-menu-toggle {
-    justify-content: center;
+    justify-content:flex-end;
     display: flex;
-    /* Zeige Hamburger-Menü */
   }
 
   .nav-list {
     display: none;
     /* Verstecke Navigation */
-    margin: 4rem auto;
+   padding-right: 10px;
   }
 
   .logo {

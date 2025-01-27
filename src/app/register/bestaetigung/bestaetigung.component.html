@@ -1,0 +1,23 @@
+<div class="backdrop"></div>
+<dialog open>
+    <div class="bestaetigung-container">
+        <h4>Bestätigung</h4>
+        <ul>
+            <li *ngIf="spenden.type === 'pickup'"><strong>Vorname:</strong> {{ spenden.vorName }}</li>
+            <li *ngIf="spenden.type === 'pickup'"><strong>Nachname:</strong> {{ spenden.nachName }}</li>
+            <li><strong>Art der Kleidung:</strong> {{ spenden.kleidungstype }}</li>
+            <li><strong>Krisengebiet:</strong> {{ spenden.krisengebiet }}</li>
+            <li><strong>Datum:</strong> {{ spenden.date }}</li>
+            <li><strong>Uhrzeit:</strong> {{ spenden.time }}</li>
+            <li *ngIf="spenden.type === 'office'"><strong>Übergabeort:</strong> Geschäftsstelle</li>
+        </ul>
+        <h5 *ngIf="spenden.type === 'pickup'">Abholaddresse</h5>
+        <ul *ngIf="spenden.type === 'pickup'">
+            <li><strong>Strasse/Hausnummer:</strong> {{ spenden.strasse }}</li>
+            <li><strong>Postleitzahl:</strong> {{ spenden.plz}}</li>
+            <li><strong>Ort:</strong> {{ spenden.ort}}</li>
+        </ul>
+        <p>Vielen Dank für Ihre Spende <i class="bi bi-heart-fill"></i>!</p>
+    </div>
+    <button type="button" (click)="onCancel()">Zur Startseite <i class="bi bi-arrow-right-circle"></i></button>
+</dialog>

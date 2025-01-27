@@ -1,0 +1,125 @@
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+dialog {
+    width: 90%;
+    max-width: 30rem;
+    background-color: #433352;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    padding: 1rem;
+    top: 5rem;
+    margin-top: 50px;
+}
+
+.bestaetigung-container {
+    max-width: 25rem;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #c6cdd5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Stil für das <h4>-Element */
+h4 {
+    font-size: 1.65rem;
+    font-weight: bold;
+    color: #9615aa;
+    ;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #d25ae5;
+    padding-bottom: 8px;
+    letter-spacing: 0.1rem;
+    /* Leichte Buchstabenabstände */
+}
+
+
+.bestaetigung-container p {
+    font-size: 1rem;
+    color: #be0c0c;
+    font-style: oblique;
+    margin-bottom: 30px;
+}
+
+.bestaetigung-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bestaetigung-container ul li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: left;
+    border-bottom: 1px solid #a8a6a8;
+
+}
+
+.bestaetigung ul li strong {
+    color: #000;
+}
+
+button {
+    background-color: #9615aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Optional: Hover-Effekt */
+button:hover {
+    background-color: #780d71;
+    /* Ändert die Hintergrundfarbe bei Hover */
+}
+
+/* Stil für das <h5>-Element */
+h5 {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #290324;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    border-bottom: 1px solid #c97dd5;
+    padding-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    dialog {
+        margin-top: 10px;
+    }
+
+    .bestaetigung-container {
+        padding: 10px;
+    }
+
+    .bestaetigung-container h4 {
+        font-size: 1.5rem;
+    }
+
+    .bestaetigung-container p {
+        font-size: 1rem;
+    }
+
+    .bestaetigung-container ul li {
+        font-size: 0.9rem;
+    }
+}

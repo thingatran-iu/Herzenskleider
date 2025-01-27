@@ -3,146 +3,149 @@
   <form #spendenForm="ngForm" class="row g-3" (ngSubmit)="submitForm()">
     <h6>ANMELDUNG</h6>
 
+    <!-- Seite 1: Allgemeine Angaben -->
+    <ng-container *ngIf="currentPage === 1">
+      <div class="form-group">
+        <label class="form-label">Art der Übergabe
+          <span class="text-danger">*</span></label>
+        <select #uebergabeart="ngModel" [(ngModel)]="spenden.type" name="uebergabeart" class="form-select" required>
+          <option disabled selected value="">Bitte auswählen...</option>
+          <option value="office">Übergabe an der Geschäftsstelle</option>
+          <option value="pickup">Abholung</option>
+        </select>
+        <div *ngIf="uebergabeart.invalid && uebergabeart.touched" class="text-danger">
+          <small *ngIf="uebergabeart.errors?.['required']">Art der Übergabe ist erforderlich!</small>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <!-- Label und Dropdown für Art der Kleidung und Krisengebiet -->
+        <div class="form-group">
+          <label for="validationDefault03" class="form-label">Art der Kleidung<span class="text-danger">*</span></label>
+          <select #art="ngModel" [(ngModel)]="spenden.kleidungstype" name="clothingType" class="form-select"
+            id="validationDefault03" required>
+            <option selected disabled value="">Bitte auswählen...</option>
+            <option *ngFor="let art of kleidungstypes" [value]="art">{{ art }}</option>
+          </select>
+          <small *ngIf="art.errors?.['required'] && art.touched" class="text-danger">
+            Uhrzeit ist erforderlich!
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="validationDefault04" class="form-label">Krisengebiet<span class="text-danger">*</span></label>
+          <select #gebiet="ngModel" [(ngModel)]="spenden.krisengebiet" id="validationDefault04" name="crisisRegion"
+            class="form-select" required>
+            <option selected disabled value="">Bitte auswählen...</option>
+            <option *ngFor="let region of krisengebiets" [value]="region">{{ region }}</option>
+          </select>
+          <small *ngIf="gebiet.errors?.['required'] && gebiet.touched" class="text-danger">
+            Uhrzeit ist erforderlich!
+          </small>
+        </div>
+      </div>
+      <!-- Datum und Uhrzeit -->
+      <div class="form-group-row">
+        <div class="form-group">
+          <label for="validationDefault05" class="form-label">Datum<span class="text-danger">*</span></label>
+          <input id="validationDefault05" class="form-control" type="date" name="date" [(ngModel)]="spenden.date"
+            #date="ngModel" required [min]="currentDate" />
+          <div *ngIf="date.invalid && date.touched" class="text-danger">
+            <small *ngIf="date.errors?.['required']">Datum ist erforderlich!</small>
+            <small *ngIf="date.errors?.['invalidDate']">Das Datum muss in der Zukunft liegen.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="uhrzeit">Uhrzeit<span class="text-danger">*</span></label>
+          <input id="uhrzeit" class="form-control" type="time" name="time" [(ngModel)]="spenden.time" #time="ngModel"
+            required [min]="currentTime" />
+          <div *ngIf="time.invalid && time.touched" class="text-danger">
+            <small *ngIf="time.errors?.['required']">Uhrzeit ist erforderlich!</small>
+            <small *ngIf="time.errors?.['invalidTime']">Die Uhrzeit muss in der Zukunft liegen.</small>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Seite 2: Abholadresse (nur bei Abholung) -->
+    <ng-container *ngIf="currentPage === 2">
+      <div *ngIf="spenden.type === 'pickup'">
+        <h4>Abholadresse</h4>
+        <!-- Anrede -->
+        <div class="col-md">
+          <label>Anrede<span class="text-danger">*</span>
+            <select class="form-select" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Frau</option>
+              <option>Herr</option>
+              <option>Neutrale Anrede</option>
+            </select>
+          </label>
+        </div>
+        <!-- Vorname und Nachname -->
+        <div class="form-group-row">
+          <!-- Vorname -->
+          <div class="form-group">
+            <label for="vName">Vorname<span class="text-danger">*</span></label>
+            <input type="text" id="vName" name="vName" class="form-control" #vName="ngModel"
+              [(ngModel)]="spenden.vorName" required>
+            <div *ngIf="vName.errors?.['required'] && vName.touched" class="text-danger">
+              Vorname ist erforderlich.
+            </div>
+          </div>
+
+          <!-- Nachname -->
+          <div class="form-group">
+            <label for="nName">Nachname<span class="text-danger">*</span></label>
+            <input type="text" id="nName" name="nachName" class="form-control" #nName="ngModel"
+              [(ngModel)]="spenden.nachName" required minlength="4">
+            <div *ngIf="nName.errors?.['required'] && nName.touched" class="text-danger">
+              Nachname ist erforderlich.
+            </div>
+            <div *ngIf="nName.errors?.['minlength'] && nName.touched" class="text-danger">
+              Nachname muss mindestens 4 Zeichen enthalten.
+            </div>
+          </div>
+        </div>
+
+        <!-- Strasse-->
+        <div class="form-group">
+          <label for="hNummer" class="form-label">Straße/Hausnummer
+            <span class="text-danger">*</span></label>
+          <input id="hNummer" type="text" name="strasse" class="form-control" #strasse="ngModel"
+            [(ngModel)]="spenden.strasse" required>
+          <small *ngIf="strasse.errors?.['required'] && strasse.touched" class="text-danger">
+            Straße ist erforderlich!
+          </small>
+        </div>
+        <!-- PLZ und Ort -->
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="validationDefault04" class="form-label">Postleitzahl
+              <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" #postLz="ngModel" [(ngModel)]="spenden.plz" name="plz" required />
+            <small *ngIf="postLz.errors?.['required'] && postLz.touched" class="text-danger">
+              Postleitzahl ist erforderlich!
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="validationDefault05" class="form-label">Ort
+              <span class="text-danger">*</span></label>
+            <input #stadt="ngModel" [(ngModel)]="spenden.ort" type="text" class="form-control" name="ort" required />
+            <small *ngIf="stadt.errors?.['required'] && stadt.touched" class="text-danger">
+              Ort ist erforderlich!
+            </small>
+          </div>
+        </div>
+      </div>
+    </ng-container>
     <!-- Anzeige der Farbanpassung basierend auf der Auswahl -->
-    <div><label>Gewählte Übergabeart:</label>
+    <div class="Art"> <label>Gewählte Übergabeart:</label>
       <p [ngClass]="spenden.type === 'pickup' ? 'pickup-class' : 'office-class'">
-        <strong>{{ spenden.type }}</strong>
+        <strong>{{spenden.type }}</strong>
       </p>
     </div>
-    <!-- Anrede -->
-    <div class="col-md-">
-      <label  class="form-label" for="anrede">Anrede<span class="text-danger">*</span></label>
-        <select id="anrede" class="form-select" required>
-          <option selected disabled value="">Bitte auswählen..</option>
-          <option>Frau</option>
-          <option>Herr</option>
-        </select>
-    </div>
-    <!-- Vorname -->
-    <div class="col-md-6">
-      <label for="vName" class="form-label">Vorname<span class="text-danger">*</span></label>
-      <input type="text" class="form-control"  id="vName" name="vName" #vName="ngModel"
-        [(ngModel)]="spenden.vorName" required>
-      <small *ngIf="vName.errors?.['required'] && vName.touched" class="text-danger">
-        Vorname ist erforderlich!</small>
-    </div>
-    <!-- Nachname -->
-    <div class="col-md-6">
-      <label for="nName" class="form-label">Nachname<span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="nName" name="nachName" #nName="ngModel"
-        [(ngModel)]="spenden.nachName" required>
-      <small *ngIf="nName.errors?.['required'] && nName.touched" class="text-danger">
-        Nachname ist erforderlich! </small>
-    </div>
 
-    <!-- Gemeinsame Felder für beide Übergabearten -->
-    <div class="col-md-6">
-      <label for="validationDefault03" class="form-label">Art der Kleidung<span class="text-danger">*</span></label>
-      <select #art="ngModel" [(ngModel)]="spenden.kleidungstype" name="clothingType" class="form-select"
-        id="validationDefault03" required>
-        <option selected disabled value="">Bitte auswählen...</option>
-        <option *ngFor="let art of kleidungstypes" [value]="art">{{ art }}</option>
-      </select>
-      <small *ngIf="art.errors?.['required'] && art.touched" class="text-danger">
-        Art der Kleidung ist erforderlich!
-      </small>
-    </div>
-    <!-- Auswahl des Krisengebiets -->
-    <div class="col-md-6">
-      <label for="validationDefault04" class="form-label">Krisengebiet<span class="text-danger">*</span></label>
-      <select #gebiet="ngModel" [(ngModel)]="spenden.krisengebiet" id="validationDefault04" name="crisisRegion" class="form-select" required>
-        <option selected disabled value="">Bitte auswählen...</option>
-        <option *ngFor="let region of krisengebiets" [value]="region">{{ region }}</option>
-      </select>
-      <small *ngIf="gebiet.errors?.['required'] && gebiet.touched" class="text-danger">
-        Kriesengebiet ist erforderlich!</small>
-    </div>
-    <!-- Datumseingabe -->
-    <div class="col-md-6">
-      <label for="validationDefault05"  class="form-label">Datum:
-        <span class="text-danger">*</span></label>
-      <input class="form-control" type="date" name="date"  id="validationDefault05"  [(ngModel)]="spenden.date" #date="ngModel" required>
-      <div *ngIf="date.invalid && date.touched" class="text-danger">
-        <small *ngIf="date.errors?.['required']">Datum ist erforderlich!</small>
-      </div>
-    </div>
-    <!-- Uhrzeiteingabe -->
-    <div class="col-md-6">
-      <label class="form-label" for="uhrzeit">Uhrzeit:
-        <span class="text-danger">*</span> </label>
-      <input id="uhrzeit" class="form-control" type="time" name="time" [(ngModel)]="spenden.time" #time="ngModel" required>
-   
-      <!-- Validierungsfehler anzeigen -->
-      <div *ngIf="time.invalid && time.touched" class="text-danger">
-        <small *ngIf="time.errors?.['required']">Datum ist erforderlich!</small>
-      </div>
-    </div>
-
-    <div class="col-md-">
-      <label class="form-label">Art der Übergabe
-        <span class="text-danger">*</span>
-      </label>
-      <select #uebergabeart="ngModel" [(ngModel)]="spenden.type" name="uebergabeart" class="form-select" required>
-        <option disabled selected value="">Bitte auswählen...</option>
-        <option value="office">Übergabe an der Geschäftsstelle</option>
-        <option value="pickup">Abholung</option>
-      </select>
-      <!-- Validierungsnachricht -->
-      <div *ngIf="uebergabeart.invalid && uebergabeart.touched" class="text-danger">
-        <small *ngIf="uebergabeart.errors?.['required']">Art der Übergabe ist erforderlich!</small>
-      </div>
-    </div>
-
-    <!-- Abholinformationen, wenn 'Abholung' ausgewählt ist -->
-    <div class="row g-3" *ngIf="spenden.type === 'pickup'">
-      <h6>ABHOLADRESSE</h6>
-      <div class="col-md-">
-        <label for="hNummer" class="form-label">Strasse/Hausnummer<span class="text-danger">*</span></label>
-        <input id="hNummer" type="text" name="strasse" class="form-control" #strasse="ngModel" [(ngModel)]="spenden.strasse"
-          required>
-     
-        <small *ngIf="strasse.errors?.['required'] && strasse.touched" class="text-danger">
-          Strasse ist erforderlich!
-        </small>
-      </div>
-
-      <!-- Postleitzahl (nur bei Abholung) -->
-      <div class="col-md-3">
-        <label for="validationDefault04" class="form-label">
-          Postleitzahl<span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" #postLz="ngModel" [(ngModel)]="spenden.plz" name="plz" required />
-        <!-- Fehlermeldung bei leerem Feld -->
-        <small *ngIf="postLz.errors?.['required'] && postLz.touched" class="text-danger">
-          Postleitzahl ist erforderlich!
-        </small>
-      </div>
-      <!-- Eingabe Ort -->
-      <div class="col-md-9">
-        <label for="validationDefault05" class="form-label">
-          Ort<span class="text-danger">*</span>
-        </label>
-        <input #stadt="ngModel" [(ngModel)]="spenden.ort" type="text" class="form-control" name="ort" required />
-        <small *ngIf="stadt.errors?.['required'] && stadt.touched" class="text-danger">
-          Ort ist erforderlich!
-        </small>
-      </div>
-      <!-- E-Mail Eingabe -->
-      <div class="col-md-">
-        <label for="validationDefaultUsername" class="form-label">E-Mail</label>
-        <div class="input-group">
-          <span class="input-group-text" id="inputGroupPrepend2">&#64;</span>
-          <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="spenden.email" required>
-        </div>
-        <small *ngIf="email.errors?.['required'] && email.touched" class="text-danger">
-          E-Mail ist erforderlich.
-        </small>
-      </div>
-
-
-    </div>
     <!-- Bestätigung -->
-    <div>
+    <div *ngIf="(currentPage === 2 && spenden.type === 'pickup') || (currentPage === 1 && spenden.type === 'office')">
       <label>
         <input type="checkbox" [(ngModel)]="spenden.bestaetigen" name="bestaetigen" required />
         Ich bestätige, dass die Angaben korrekt sind.
@@ -152,10 +155,18 @@
       </small>
     </div>
 
+    <!-- Navigation-Buttons -->
     <div class="col-12">
-      <button type="button" (click)="onCancel()">ABBRECHEN</button>
-      <button class="btn btn-primary" type="submit">JEZT SPENDEN</button>
+      <button type="button" class="btn btn-secondary" (click)="onPrevious()"
+        *ngIf="(currentPage > 1 && spenden.type === 'pickup') || (currentPage === 1 && spenden.type === 'office')">Zurück</button>
+      <button type="button" class="btn btn-primary" (click)="onNext()"
+        *ngIf="(currentPage === 1  && spenden.type === 'pickup')">Weiter <i
+          class="bi bi-arrow-right-circle"></i></button>
+      <button
+        *ngIf="(currentPage === 1 && spenden.type === 'office') || (currentPage === 2 && spenden.type === 'pickup')"
+        type="submit" class="btn btn-success">
+        Jetzt Spenden
+      </button>
     </div>
-
   </form>
 </dialog>

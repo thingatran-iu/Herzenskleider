@@ -3,9 +3,9 @@
   FAQ und Kontakt. Außerdem gibt es einen Such-Button. -->
 <nav class="top-nav">
     <ul class="nav-list">
-        <li><a routerLink="/home">News</a></li><!-- Link zur News-Seite -->
-        <li><a routerLink="/faq">FAQ</a></li><!-- Link zur FAQ-Seite -->
-        <li><a routerLink="/kontakt">Kontakt</a></li><!-- Link zur Kontakt-Seite -->
+        <li><a routerLink="/home">News</a></li>
+        <li><a routerLink="/faq">FAQ</a></li>
+        <li><a routerLink="/kontakt">Kontakt</a></li>
         <li class="search">
             <!-- Such-Button mit einem Icon -->
             <button aria-label="Search">
@@ -18,13 +18,12 @@
 <!-- Hauptbereich mit Logo und Navigation -->
 <header class="header">
     <!-- Logo -->
-    <!-- Dieser Abschnitt enthält das Logo der Website und den Titel "Herzenkleider". -->
     <div class="logo">
-        <img src="assets/images/logo.png" alt="Logo" width="80" height="50" />
+        <img src="assets/images/logo.png" alt="Logo" width="90" height="70" />
         <h3>Herzenskleider</h3>
     </div>
 
-    <!-- Desktop-Navigation -->
+      <!-- Desktop-Navigation -->
     <!-- Navigation für Desktop-Bildschirme mit Dropdown-Menüs. -->
     <nav class="main-nav">
         <ul class="nav-list">
@@ -44,19 +43,17 @@
             </li>
             <li><a routerLink="/organisation">Organisation</a></li>
         </ul>
-    </nav>
-    <!-- Spenden-Button -->
+         <!-- Spenden-Button -->
     <!-- Ein Button, der die Nutzer zur Spenden-Seite weiterleitet. -->
     <button type="button" class="btn btn-sm btn-pill btn-danger" routerLink="/register">
         <i class="fa fa-heart"></i> Spenden
     </button>
+    </nav>
+  
 
-    <!-- Mobile-Menü-Toggle -->
-    <!-- Button zum Öffnen des mobilen Menüs. -->
-    <div>
-        <button class="mobile-menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">☰
-        </button>
-    </div>
+
+  
+
 
     <!-- Offcanvas-Menü für mobile Geräte. -->
     <div class="container-fluid mt-3">
@@ -79,5 +76,14 @@
                 </div>
             </div>
         </div>
+        
+    
+    </div>
+     
+    <!-- Mobile-Menü-Toggle -->
+    <!-- Button zum Öffnen des mobilen Menüs. -->
+    <div>
+        <button class="mobile-menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">☰
+        </button>
     </div>
 </header>

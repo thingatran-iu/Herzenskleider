@@ -1,7 +1,8 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NewSpenderData } from './spender.model';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  @Output() add = new EventEmitter<NewSpenderData>();
   submitted = false;
+  currentPage: number = 1;
 
   // Spenden-Datenstruktur
   spenden = {
@@ -28,6 +31,8 @@ export class RegisterComponent {
     time: '',
     bestaetigen: false
   }
+  currentDate: string = '';
+  currentTime: string = '';
   // Auswahlmöglichkeiten
   krisengebiets = ['Region A', 'Region B', 'Region C'];
   kleidungstypes = ['T-Shirts', 'Hosen', 'Jacken', 'Schuhe'];
@@ -37,8 +42,8 @@ export class RegisterComponent {
      * Formular absenden
      */
   submitForm() {
-    const errors: string[] = []; // Liste der Fehlermeldungen
-   
+    const errors: string[] = [];
+
     // Validierung basierend auf dem Spendentyp
     if (this.spenden.type === 'office') {
       this.validateCommonFields(errors);
@@ -70,9 +75,17 @@ export class RegisterComponent {
    * und Spender muss Eingabe bestätigen
    */
   private validateCommonFields(errors: string[]): void {
+    const now = new Date();
+
     if (!this.spenden.date) {
       errors.push('Bitte geben Sie ein Datum an.');
+    } else {
+      const selectedDate = new Date(this.spenden.date + 'T' + (this.spenden.time || '00:00'));
+      if (selectedDate <= now) {
+        errors.push('Das Datum und die Uhrzeit müssen in der Zukunft liegen.');
+      }
     }
+
     if (!this.spenden.time) {
       errors.push('Bitte geben Sie eine Uhrzeit an.');
     }
@@ -105,6 +118,18 @@ export class RegisterComponent {
   private logSuccess(): void {
     console.log('Erfolgreich registriert:', this.spenden);
     alert(`Ihre Kleiderspende wurde erfolgreich registriert:\n${JSON.stringify(this.spenden, null, 2)}`);
+    this.router.navigate(['/bestaetigung'], { state: { donation: this.spenden } });
+    this.add.emit({
+      vorname: this.spenden.vorName,
+      nachname: this.spenden.nachName,
+      kleidungsType: this.spenden.kleidungstype,
+      krisenGebiet: this.spenden.krisengebiet,
+      Date: this.spenden.date,
+      Time: this.spenden.time,
+      Plz: this.spenden.plz,
+      Ort: this.spenden.ort,
+      Email: this.spenden.email,
+    });
   }
 
   /**
@@ -113,6 +138,13 @@ export class RegisterComponent {
   onCancel(): void {
     this.router.navigate(['/']);
   }
-}
 
-  
+
+  onPrevious(): void {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+  onNext(): void {
+    if (this.currentPage === 1) this.currentPage++;
+  }
+
+}
