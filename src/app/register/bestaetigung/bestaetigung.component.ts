@@ -11,12 +11,10 @@ import { Router } from '@angular/router';
 })
 export class BestaetigungComponent {
   spenden: any;
-
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.spenden = navigation?.extras?.state?.['donation'];
   }
-
   onCancel(): void {
     this.router.navigate(['/']);
   }

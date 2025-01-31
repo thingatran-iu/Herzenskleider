@@ -2,7 +2,11 @@
 <dialog open>
   <form #spendenForm="ngForm" class="row g-3" (ngSubmit)="submitForm()">
     <h6>ANMELDUNG</h6>
-
+   <!-- Fortschrittsanzeige für aktuelle Seite -->
+   <div class="page-indicator">
+    <i class="bi bi-1-circle" [ngClass]="{ 'active': currentPage === 1 }"></i>
+    <i class="bi bi-2-circle" [ngClass]="{ 'active': currentPage === 2 }"></i>
+  </div>
     <!-- Seite 1: Allgemeine Angaben -->
     <ng-container *ngIf="currentPage === 1">
       <div class="form-group">
@@ -64,7 +68,6 @@
         </div>
       </div>
     </ng-container>
-
     <!-- Seite 2: Abholadresse (nur bei Abholung) -->
     <ng-container *ngIf="currentPage === 2">
       <div *ngIf="spenden.type === 'pickup'">
@@ -87,9 +90,9 @@
             <label for="vName">Vorname<span class="text-danger">*</span></label>
             <input type="text" id="vName" name="vName" class="form-control" #vName="ngModel"
               [(ngModel)]="spenden.vorName" required>
-            <div *ngIf="vName.errors?.['required'] && vName.touched" class="text-danger">
+            <small *ngIf="vName.errors?.['required'] && vName.touched" class="text-danger">
               Vorname ist erforderlich.
-            </div>
+            </small>
           </div>
 
           <!-- Nachname -->
@@ -97,15 +100,12 @@
             <label for="nName">Nachname<span class="text-danger">*</span></label>
             <input type="text" id="nName" name="nachName" class="form-control" #nName="ngModel"
               [(ngModel)]="spenden.nachName" required minlength="4">
-            <div *ngIf="nName.errors?.['required'] && nName.touched" class="text-danger">
+            <small *ngIf="nName.errors?.['required'] && nName.touched" class="text-danger">
               Nachname ist erforderlich.
-            </div>
-            <div *ngIf="nName.errors?.['minlength'] && nName.touched" class="text-danger">
-              Nachname muss mindestens 4 Zeichen enthalten.
-            </div>
+            </small>
+        
           </div>
         </div>
-
         <!-- Strasse-->
         <div class="form-group">
           <label for="hNummer" class="form-label">Straße/Hausnummer
@@ -138,14 +138,13 @@
       </div>
     </ng-container>
     <!-- Anzeige der Farbanpassung basierend auf der Auswahl -->
-    <div class="Art"> <label>Gewählte Übergabeart:</label>
+    <div class="Art"> Gewählte Übergabeart: 
       <p [ngClass]="spenden.type === 'pickup' ? 'pickup-class' : 'office-class'">
-        <strong>{{spenden.type }}</strong>
+       {{spenden.type }}
       </p>
     </div>
-
     <!-- Bestätigung -->
-    <div *ngIf="(currentPage === 2 && spenden.type === 'pickup') || (currentPage === 1 && spenden.type === 'office')">
+    <div class="checkbox" *ngIf="(currentPage === 2 && spenden.type === 'pickup') || (currentPage === 1 && spenden.type === 'office')">
       <label>
         <input type="checkbox" [(ngModel)]="spenden.bestaetigen" name="bestaetigen" required />
         Ich bestätige, dass die Angaben korrekt sind.
@@ -154,17 +153,15 @@
         Bitte bestätigen Sie, dass Ihre Angaben korrekt sind.
       </small>
     </div>
-
     <!-- Navigation-Buttons -->
-    <div class="col-12">
-      <button type="button" class="btn btn-secondary" (click)="onPrevious()"
-        *ngIf="(currentPage > 1 && spenden.type === 'pickup') || (currentPage === 1 && spenden.type === 'office')">Zurück</button>
-      <button type="button" class="btn btn-primary" (click)="onNext()"
-        *ngIf="(currentPage === 1  && spenden.type === 'pickup')">Weiter <i
+    <div class="button-container">
+      <button type="button" 
+      (click)="onPrevious()" *ngIf="(currentPage > 1 && spenden.type === 'pickup')">Zurück</button>
+      <button type="button" 
+      (click)="onNext()" *ngIf="(currentPage === 1  && spenden.type === 'pickup')">Weiter <i
           class="bi bi-arrow-right-circle"></i></button>
-      <button
-        *ngIf="(currentPage === 1 && spenden.type === 'office') || (currentPage === 2 && spenden.type === 'pickup')"
-        type="submit" class="btn btn-success">
+      <button type="submit" class="btn btn-success"
+      *ngIf="(currentPage === 1 && spenden.type === 'office') || (currentPage === 2 && spenden.type === 'pickup')">
         Jetzt Spenden
       </button>
     </div>

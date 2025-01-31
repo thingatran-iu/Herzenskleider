@@ -1,0 +1,92 @@
+/* Allgemeine Container-Einstellungen */
+.container-fluid {
+    background-color: #17a2b8; /* Info-Blau */
+    color: black;
+    text-align: center;
+    padding: 3rem 1rem; /* Großzügiges Padding für mehr Raum */
+  }
+  
+  .container-fluid img {
+    margin-bottom: 1rem; /* Abstand unter dem Bild */
+    border-radius: 8px; /* Abgerundete Kanten für Bilder */
+  }
+  
+  .container-fluid h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .container-fluid p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  
+  /* Abschnitt der Spalten */
+  .container .row {
+    margin-top: 3rem; /* Abstand über den Kategorien */
+  }
+  
+  .col-sm-4 {
+    text-align: center;
+    margin-bottom: 2rem; /* Abstand zwischen den Reihen bei kleineren Bildschirmen */
+  }
+  .col-sm-4 h3 {
+    font-size: 1rem; /* Größere Schriftgröße für mehr Sichtbarkeit */
+    color: #0c5460; /* Dunklerer Blau-Ton */
+    font-weight: bold; /* Fetter Text für mehr Präsenz */
+    text-transform: uppercase; /* Text in Großbuchstaben für mehr Aufmerksamkeit */
+    margin-bottom: 1.5rem; /* Etwas mehr Abstand nach unten */
+    text-align: center; /* Zentriert die Überschrift innerhalb der Spalte */
+    border-bottom: 2px solid #0c5460; /* Unterstrich für visuelle Abtrennung */
+    padding-bottom: 0.5rem; /* Abstand zum Unterstrich */
+}
+  .col-sm-4 img {
+    width: 150px;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 1rem; /* Abstand zwischen Bild und Text */
+    border-radius: 8px; /* Abgerundete Kanten */
+  }
+  
+  .col-sm-4 p {
+    font-size: 1rem;
+    color: #333; /* Dunklere Schriftfarbe für Lesbarkeit */
+    margin-bottom: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container-fluid h1 {
+      font-size: 2rem; 
+    }
+    .col-sm-4 h3 {
+      font-size: 1.5rem; /* Kleinere Überschriften */
+    }
+    .col-sm-4 img {
+      width: 120px;
+      height: 120px; /* Kleinere Bilder für mobile Geräte */
+    }
+  }
+  @media (max-width: 480px) {
+    .container-fluid h1 {
+      font-size: 1.6rem;
+    }
+    .col-sm-4 h3 {
+      font-size: 1.2rem;
+    }
+    .col-sm-4 img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  @media (max-width: 768px) {
+    .container .row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  
